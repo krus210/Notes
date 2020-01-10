@@ -4,8 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/margin_create_note"
+    android:layout_marginEnd="@dimen/margin_create_note"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CreateNoteActivity"
     tools:showIn="@layout/activity_create_note">
+
+    <EditText
+        android:id="@+id/edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/edit_snippet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.2"
+        android:layout_marginBottom="@dimen/margin_create_note"/>
+
+    <EditText
+        android:id="@+id/edit_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_snippet"
+        android:hint="@string/snippet"
+        android:gravity="start|top"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/checkbox_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_title"
+        android:layout_marginBottom="@dimen/margin_create_note"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deadline"
+        app:layout_constraintBottom_toTopOf="@+id/linear_layout_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_snippet"/>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_deadline">
+
+        <EditText
+            android:id="@+id/edit_date_deadline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_deadline"
+            android:inputType="datetime"
+            android:layout_weight="6"/>
+
+        <Button
+            android:id="@+id/button_show_calendar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

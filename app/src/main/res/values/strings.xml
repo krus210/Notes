@@ -2,4 +2,8 @@
     <string name="app_name">Заметки</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_note">Новая заметка</string>
+    <string name="title">Заголовок</string>
+    <string name="snippet">Тело заметки</string>
+    <string name="deadline">Дедлайн</string>
+    <string name="date_deadline">Дата дедлайна</string>
 </resources>
