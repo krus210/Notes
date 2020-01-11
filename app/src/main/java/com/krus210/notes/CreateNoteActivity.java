@@ -1,6 +1,7 @@
 package com.krus210.notes;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +10,31 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class CreateNoteActivity extends AppCompatActivity {
+
+    EditText editTitle;
+    EditText editSnippet;
+    CheckBox checkBoxDeadline;
+    EditText editDateDeadline;
+    Button buttonShowCalendar;
+    DatePickerDialog datePickerDialog;
+    int year;
+    int month;
+    int dayOfMonth;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +48,61 @@ public class CreateNoteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_create_note);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        editTitle = findViewById(R.id.edit_title);
+        editSnippet = findViewById(R.id.edit_snippet);
+        checkBoxDeadline = findViewById(R.id.checkbox_deadline);
+        editDateDeadline = findViewById(R.id.edit_date_deadline);
+        buttonShowCalendar = findViewById(R.id.button_show_calendar);
+
+        editDateDeadline.setEnabled(false);
+        buttonShowCalendar.setEnabled(false);
+
+        checkBoxDeadline.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!buttonView.isChecked()) {
+                    editDateDeadline.setEnabled(false);
+                    buttonShowCalendar.setEnabled(false);
+                } else {
+                    editDateDeadline.setEnabled(true);
+                    buttonShowCalendar.setEnabled(true);
+                    String currentDateAndTime = getCurrentDateTime(R.string.date_time_format);
+                    editDateDeadline.setText(currentDateAndTime);
+                }
+            }
+        });
     }
+
+    public void onClickShowCalendar(View view) {
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String dateFormat;
+                        if (month < 10) {
+                            dateFormat = getString(R.string.date_format_month_lower_10);
+                        } else {
+                            dateFormat = getString(R.string.date_format_month_upper_9);
+                        }
+                        String currentTime = getCurrentDateTime(R.string.time_format);
+                        String dateFromCalendar = String.format(
+                                dateFormat, day, month + 1, year, currentTime);
+                        editDateDeadline.setText(dateFromCalendar);
+                    }
+                }, year, month, dayOfMonth);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.show();
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -59,5 +131,12 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private String getCurrentDateTime(int formatDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat(getString(formatDate),
+                Locale.getDefault());
+        return sdf.format(new Date());
+    }
+
 
 }
