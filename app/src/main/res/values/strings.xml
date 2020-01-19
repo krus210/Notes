@@ -10,4 +10,5 @@
     <string name="time_format">HH:mm</string>
     <string name="date_format_month_lower_10">%d.0%d.%d %s</string>
     <string name="date_format_month_upper_9">%d.%d.%d %s</string>
+    <string name="error_date_format">Ошибка формата ввода даты и времени</string>
 </resources>

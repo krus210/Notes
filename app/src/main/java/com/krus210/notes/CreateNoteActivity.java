@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -126,6 +127,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_note) {
+            onBackPressed();
             return true;
         }
 
@@ -138,5 +140,28 @@ public class CreateNoteActivity extends AppCompatActivity {
         return sdf.format(new Date());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String title = editTitle.getText().toString();
+        String snippet = editSnippet.getText().toString();
+        Note note;
+        if (checkBoxDeadline.isChecked()) {
+            SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
+                    Locale.getDefault());
+            Date dateDeadline;
+            try {
+                dateDeadline = sdf.parse(editDateDeadline.getText().toString());
+                note = new Note(title, snippet, dateDeadline);
+            } catch (ParseException e) {
+                Toast.makeText(this,
+                        getString(R.string.error_date_format), Toast.LENGTH_LONG).show();
+                note = new Note(title, snippet);
+            }
+        } else {
+            note = new Note(title, snippet);
+        }
+        App.getNoteRepository().saveNote(note);
 
+    }
 }
