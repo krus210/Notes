@@ -20,7 +20,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_list_notes" />
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_list_layout"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create_note"

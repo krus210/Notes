@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_card_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title Example"/>
+
+        <TextView
+            android:id="@+id/text_card_view_snippet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="140"
+            android:text="Snippet Example"/>
+
+        <TextView
+            android:id="@+id/text_card_view_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deadline Example"
+            android:gravity="end"/>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

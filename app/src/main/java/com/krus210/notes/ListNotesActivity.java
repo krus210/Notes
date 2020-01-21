@@ -5,15 +5,24 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class ListNotesActivity extends AppCompatActivity {
+
+    private final int REQUESTED_CODE_CREATE_NOTE_ACTIVITY = 1;
+    private List<Note> notes;
+    ItemsNoteAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +42,14 @@ public class ListNotesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ListNotesActivity.this,
                         CreateNoteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUESTED_CODE_CREATE_NOTE_ACTIVITY);
             }
         });
-        int size = App.getNoteRepository().getNotes().size();
-        Toast.makeText(this, "list size is " + size, Toast.LENGTH_SHORT).show();
+        ListView listView = findViewById(R.id.list_view);
+        notes = App.getNoteRepository().getNotes();
+        adapter = new ItemsNoteAdapter(notes);
+        listView.setAdapter(adapter);
+
     }
 
     @Override
@@ -63,9 +75,17 @@ public class ListNotesActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        int size = App.getNoteRepository().getNotes().size();
-        Toast.makeText(this, "list size is " + size, Toast.LENGTH_SHORT).show();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case REQUESTED_CODE_CREATE_NOTE_ACTIVITY:
+                if(resultCode == RESULT_OK){
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 }

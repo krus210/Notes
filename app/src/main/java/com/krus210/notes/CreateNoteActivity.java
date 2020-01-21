@@ -2,11 +2,13 @@ package com.krus210.notes;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -163,5 +165,12 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
         App.getNoteRepository().saveNote(note);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onBackPressed();
     }
 }
