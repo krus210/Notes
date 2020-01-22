@@ -13,20 +13,23 @@
             android:id="@+id/text_card_view_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title Example"/>
+            android:text="@string/title_example"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/text_card_view_snippet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="140"
-            android:text="Snippet Example"/>
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/snippet_example"/>
 
         <TextView
             android:id="@+id/text_card_view_deadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Deadline Example"
+            android:text="@string/deadline_example"
             android:gravity="end"/>
 
 

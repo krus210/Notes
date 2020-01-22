@@ -26,11 +26,11 @@
 
     <EditText
         android:id="@+id/edit_snippet"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="@dimen/height_snippet"
         android:hint="@string/snippet"
         android:gravity="start|top"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/checkbox_deadline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

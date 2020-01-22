@@ -11,4 +11,9 @@
     <string name="date_format_month_lower_10">%d.0%d.%d %s</string>
     <string name="date_format_month_upper_9">%d.%d.%d %s</string>
     <string name="error_date_format">Ошибка формата ввода даты и времени</string>
+    <string name="saved">Сохранено!</string>
+    <string name="title_example">Title Example</string>
+    <string name="snippet_example">Snippet Example</string>
+    <string name="deadline_example">Deadline Example</string>
+    <string name="void_note_not_added">Пустая заметка не добавлена</string>
 </resources>

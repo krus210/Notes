@@ -38,6 +38,9 @@ public class CreateNoteActivity extends AppCompatActivity {
     int month;
     int dayOfMonth;
     Calendar calendar;
+    private final String ID_OF_NOTE_DATA = "id";
+    String id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,21 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         editDateDeadline.setEnabled(false);
         buttonShowCalendar.setEnabled(false);
+        id = getIntent().getStringExtra(ID_OF_NOTE_DATA);
+        if (id != null) {
+            Note note = App.getNoteRepository().getNoteById(id);
+            editTitle.setText(note.getTitle());
+            editSnippet.setText(note.getSnippet());
+            if (note.getDateDeadline() != null) {
+                SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
+                        Locale.getDefault());
+                String dateDeadline = sdf.format(note.getDateDeadline());
+                checkBoxDeadline.setChecked(true);
+                editDateDeadline.setEnabled(true);
+                buttonShowCalendar.setEnabled(true);
+                editDateDeadline.setText(dateDeadline);
+            }
+        }
 
         checkBoxDeadline.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -163,8 +181,16 @@ public class CreateNoteActivity extends AppCompatActivity {
         } else {
             note = new Note(title, snippet);
         }
-        App.getNoteRepository().saveNote(note);
-
+        if (!(title.equals("") && snippet.equals("") && note.getDateDeadline() == null)) {
+            if (id != null) {
+                App.getNoteRepository().getNoteById(id).setTitle(title);
+                App.getNoteRepository().getNoteById(id).setSnippet(snippet);
+                App.getNoteRepository().getNoteById(id).setDateDeadline(note.getDateDeadline());
+            } else {
+                App.getNoteRepository().saveNote(note);
+                Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -173,4 +199,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }
+
+
 }
