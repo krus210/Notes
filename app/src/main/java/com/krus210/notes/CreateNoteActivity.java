@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -38,7 +39,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     int month;
     int dayOfMonth;
     Calendar calendar;
-    private final String ID_OF_NOTE_DATA = "id";
+    private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
     String id;
 
 
@@ -46,7 +47,6 @@ public class CreateNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
-
         initViews();
     }
 
@@ -67,13 +67,15 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         editDateDeadline.setEnabled(false);
         buttonShowCalendar.setEnabled(false);
-        id = getIntent().getStringExtra(ID_OF_NOTE_DATA);
+
+        id = getIntent().getStringExtra(ID_FROM_LIST_NOTES_ACTIVITY);
         if (id != null) {
             Note note = App.getNoteRepository().getNoteById(id);
             editTitle.setText(note.getTitle());
             editSnippet.setText(note.getSnippet());
             if (note.getDateDeadline() != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
+                SimpleDateFormat sdf = new SimpleDateFormat(
+                        getString(R.string.date_time_format),
                         Locale.getDefault());
                 String dateDeadline = sdf.format(note.getDateDeadline());
                 checkBoxDeadline.setChecked(true);
@@ -82,6 +84,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                 editDateDeadline.setText(dateDeadline);
             }
         }
+
 
         checkBoxDeadline.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -188,8 +191,9 @@ public class CreateNoteActivity extends AppCompatActivity {
                 App.getNoteRepository().getNoteById(id).setDateDeadline(note.getDateDeadline());
             } else {
                 App.getNoteRepository().saveNote(note);
-                Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();
+                id = note.getId();
             }
+            Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();
         }
     }
 

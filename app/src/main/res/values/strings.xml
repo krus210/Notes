@@ -16,4 +16,8 @@
     <string name="snippet_example">Snippet Example</string>
     <string name="deadline_example">Deadline Example</string>
     <string name="void_note_not_added">Пустая заметка не добавлена</string>
+    <string name="attention">Внимание</string>
+    <string name="message_delete_note">Вы уверены, что хотите удалить эту заметку?</string>
+    <string name="button_delete">Удалить</string>
+    <string name="cancel">Отмена</string>
 </resources>
