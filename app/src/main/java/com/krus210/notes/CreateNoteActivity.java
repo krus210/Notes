@@ -20,7 +20,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,7 +38,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     int month;
     int dayOfMonth;
     Calendar calendar;
-    private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
+    private static final String ID_FROM_SAVED_INSTANT_STATE = "id_from_saved_instant_state";
     String id;
 
 
@@ -68,6 +67,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         editDateDeadline.setEnabled(false);
         buttonShowCalendar.setEnabled(false);
 
+        String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
         id = getIntent().getStringExtra(ID_FROM_LIST_NOTES_ACTIVITY);
         if (id != null) {
             Note note = App.getNoteRepository().getNoteById(id);
@@ -204,5 +204,30 @@ public class CreateNoteActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(ID_FROM_SAVED_INSTANT_STATE, id);
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState.containsKey(ID_FROM_SAVED_INSTANT_STATE)) {
+            id = savedInstanceState.getString(ID_FROM_SAVED_INSTANT_STATE);
+            Note note = App.getNoteRepository().getNoteById(id);
+            editTitle.setText(note.getTitle());
+            editSnippet.setText(note.getSnippet());
+
+            if (note.getDateDeadline() != null) {
+                checkBoxDeadline.setChecked(true);
+                editDateDeadline.setEnabled(true);
+                buttonShowCalendar.setEnabled(true);
+                SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
+                        Locale.getDefault());
+                String dateDeadline = sdf.format(note.getDateDeadline());
+                editDateDeadline.setText(dateDeadline);
+            }
+        }
+    }
 }

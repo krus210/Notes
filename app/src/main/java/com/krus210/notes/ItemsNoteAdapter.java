@@ -1,5 +1,6 @@
 package com.krus210.notes;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ public class ItemsNoteAdapter extends BaseAdapter {
 
     private List<Note> items;
 
-    public ItemsNoteAdapter(List<Note> items) {
+    ItemsNoteAdapter(List<Note> items) {
         if (items == null) {
             this.items = new ArrayList<>();
         } else {
