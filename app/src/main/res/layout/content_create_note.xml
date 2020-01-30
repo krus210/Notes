@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/margin_create_note"
-    android:layout_marginEnd="@dimen/margin_create_note"
+    android:layout_marginStart="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CreateNoteActivity"
     tools:showIn="@layout/activity_create_note">
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintVertical_bias="0.2"
-        android:layout_marginBottom="@dimen/margin_create_note"/>
+        android:layout_marginBottom="@dimen/margin_standard"/>
 
     <EditText
         android:id="@+id/edit_snippet"
@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_title"
-        android:layout_marginBottom="@dimen/margin_create_note"/>
+        android:layout_marginBottom="@dimen/margin_standard"/>
 
     <CheckBox
         android:id="@+id/checkbox_deadline"
@@ -63,14 +63,16 @@
             android:layout_height="wrap_content"
             android:hint="@string/date_deadline"
             android:inputType="datetime"
-            android:layout_weight="6"/>
+            android:layout_weight="9"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_show_calendar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="onClickShowCalendar"/>
+            android:background="@drawable/ic_today_black_24dp"
+            android:onClick="onClickShowCalendar"
+            android:scaleType="center" />
 
     </LinearLayout>
 

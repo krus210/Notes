@@ -71,7 +71,7 @@ public class ListNotesActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView,
                                            View view, final int position, long id) {
-                alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+                alertDialogBuilder.setIcon(R.drawable.ic_delete_black_24dp)
                         .setTitle(R.string.attention)
                         .setMessage(R.string.message_delete_note)
                         .setPositiveButton(R.string.button_delete,
@@ -111,6 +111,8 @@ public class ListNotesActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intentSettings = new Intent(this, SettingsActivity.class);
+            startActivity(intentSettings);
             return true;
         }
 

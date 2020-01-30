@@ -1,5 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="margin_create_note">24dp</dimen>
+    <dimen name="margin_standard">24dp</dimen>
     <dimen name="height_snippet">200dp</dimen>
 </resources>

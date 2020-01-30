@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -32,7 +33,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     EditText editSnippet;
     CheckBox checkBoxDeadline;
     EditText editDateDeadline;
-    Button buttonShowCalendar;
+    ImageButton buttonShowCalendar;
     DatePickerDialog datePickerDialog;
     int year;
     int month;
