@@ -6,11 +6,11 @@ import android.content.SharedPreferences;
 public class SimpleKeystore implements Keystore {
 
     private SharedPreferences sharedPreferences;
-    private static final String SETTINGS = "settings";
+    private static final String APP_SETTINGS = "settings";
     private static final String PIN = "pin";
 
     SimpleKeystore(Context context) {
-        sharedPreferences = context.getSharedPreferences(SETTINGS, Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
 
     }
 

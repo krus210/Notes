@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EnterPinActivity"
+    android:layout_margin="@dimen/margin_high">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_pin"
+        android:layout_marginBottom="@dimen/margin_standard"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_standard">
+
+        <ImageButton
+            android:id="@+id/button_light_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oval_gray"
+            android:contentDescription="@string/button_light_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_light_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+        <ImageButton
+            android:id="@+id/button_light_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oval_gray"
+            android:contentDescription="@string/button_light_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_light_3"
+            app:layout_constraintStart_toEndOf="@+id/button_light_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button_light_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oval_gray"
+            android:contentDescription="@string/button_light_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_light_4"
+            app:layout_constraintStart_toEndOf="@+id/button_light_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button_light_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oval_gray"
+            android:contentDescription="@string/button_light_off"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_light_3"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_number_1"
+            android:text="@string/number_one"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_2"
+            android:text="@string/number_two"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_3"
+            android:text="@string/number_three"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_4"
+            android:text="@string/number_four"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_5"
+            android:text="@string/number_five"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_6"
+            android:text="@string/number_six"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_7"
+            android:text="@string/number_seven"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_8"
+            android:text="@string/number_eight"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_9"
+            android:text="@string/number_nine"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+        <Button
+            android:id="@+id/button_number_0"
+            android:text="@string/number_zero"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"/>
+
+        <Button
+            android:id="@+id/button_back"
+            android:onClick="onClickNumber"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:foreground="@drawable/ic_keyboard_backspace_black_24dp"
+            android:foregroundGravity="center"/>
+    </GridLayout>
+
+
+</LinearLayout>
