@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_new_pin"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_marginBottom="@dimen/margin_standard"/>
 
     <LinearLayout
