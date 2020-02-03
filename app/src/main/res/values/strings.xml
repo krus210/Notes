@@ -47,4 +47,5 @@
     <string name="error_read_file">Ошибка чтения файла</string>
     <string name="error_file_not_exist">Ошибка, файл не найден</string>
     <string name="null_tag">000</string>
+    <string name="write_four_digits">Введите 4 цифры</string>
 </resources>
