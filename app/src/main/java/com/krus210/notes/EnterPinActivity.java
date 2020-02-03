@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -63,28 +62,28 @@ public class EnterPinActivity extends AppCompatActivity {
         }
         switch (enteredPin.length()) {
             case 1:
-                buttonLight1.setBackgroundResource(R.drawable.shape_oval_yellow);
+                buttonLight1.setBackgroundResource(R.drawable.shape_oval_pink);
                 buttonLight2.setBackgroundResource(R.drawable.shape_oval_gray);
                 buttonLight3.setBackgroundResource(R.drawable.shape_oval_gray);
                 buttonLight4.setBackgroundResource(R.drawable.shape_oval_gray);
                 break;
             case 2:
-                buttonLight1.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight2.setBackgroundResource(R.drawable.shape_oval_yellow);
+                buttonLight1.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight2.setBackgroundResource(R.drawable.shape_oval_pink);
                 buttonLight3.setBackgroundResource(R.drawable.shape_oval_gray);
                 buttonLight4.setBackgroundResource(R.drawable.shape_oval_gray);
                 break;
             case 3:
-                buttonLight1.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight2.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight3.setBackgroundResource(R.drawable.shape_oval_yellow);
+                buttonLight1.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight2.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight3.setBackgroundResource(R.drawable.shape_oval_pink);
                 buttonLight4.setBackgroundResource(R.drawable.shape_oval_gray);
                 break;
             case 4:
-                buttonLight1.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight2.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight3.setBackgroundResource(R.drawable.shape_oval_yellow);
-                buttonLight4.setBackgroundResource(R.drawable.shape_oval_yellow);
+                buttonLight1.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight2.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight3.setBackgroundResource(R.drawable.shape_oval_pink);
+                buttonLight4.setBackgroundResource(R.drawable.shape_oval_pink);
                 break;
             default:
                 buttonLight1.setBackgroundResource(R.drawable.shape_oval_gray);
