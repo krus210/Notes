@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/date_deadline"
             android:inputType="datetime"
-            android:layout_weight="9"/>
+            android:layout_weight="12"/>
 
         <ImageButton
             android:id="@+id/button_show_calendar"

@@ -10,7 +10,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        noteRepository = new ArrayNoteRepository();
+        noteRepository = new FileNoteRepository(this);
         keystore = new SimpleKeystore(this);
     }
 

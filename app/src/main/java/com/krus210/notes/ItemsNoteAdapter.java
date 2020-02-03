@@ -53,13 +53,14 @@ public class ItemsNoteAdapter extends BaseAdapter {
         textSnippet.setText(note.getSnippet());
         TextView textDeadline = view.findViewById(R.id.text_card_view_deadline);
         if (note.getDateDeadline() != null) {
+            textDeadline.setVisibility(View.VISIBLE);
             SimpleDateFormat sdf = new SimpleDateFormat(
                     parent.getContext().getString(R.string.date_time_format),
                     Locale.getDefault());
             String dateDeadline = sdf.format(note.getDateDeadline());
             textDeadline.setText(dateDeadline);
         } else {
-            textDeadline.setText("");
+//            textDeadline.setText("");
             textDeadline.setVisibility(View.GONE);
         }
         return view;

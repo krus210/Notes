@@ -25,10 +25,10 @@ public class ListNotesActivity extends AppCompatActivity {
 
     private final int REQUESTED_CODE_CREATE_NOTE_ACTIVITY = 1;
     private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
-    private List<Note> notes;
     ItemsNoteAdapter adapter;
     Intent intentCreateNote;
     AlertDialog.Builder alertDialogBuilder;
+    List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +77,10 @@ public class ListNotesActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.button_delete,
                                 new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Note note = App.getNoteRepository().getNotes().get(position);
+                                Note note = notes.get(position);
                                 App.getNoteRepository().deleteById(note.getId());
+                                notes.clear();
+                                notes.addAll(App.getNoteRepository().getNotes());
                                 adapter.notifyDataSetChanged();
 
                             }
@@ -124,6 +126,8 @@ public class ListNotesActivity extends AppCompatActivity {
         switch (requestCode){
             case REQUESTED_CODE_CREATE_NOTE_ACTIVITY:
                 if(resultCode == RESULT_OK){
+                    notes.clear();
+                    notes.addAll(App.getNoteRepository().getNotes());
                     adapter.notifyDataSetChanged();
                 }
                 break;

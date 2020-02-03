@@ -42,4 +42,9 @@
     <string name="number_nine">9</string>
     <string name="number_zero">0</string>
     <string name="not_equal_pin">Неверный пин-код</string>
+    <string name="file_tag">###</string>
+    <string name="error_save_file">Ошибка сохранения файла</string>
+    <string name="error_read_file">Ошибка чтения файла</string>
+    <string name="error_file_not_exist">Ошибка, файл не найден</string>
+    <string name="null_tag">000</string>
 </resources>

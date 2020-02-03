@@ -9,7 +9,7 @@ public class ArrayNoteRepository implements NoteRepository {
 
     private List<Note> notes;
 
-    public ArrayNoteRepository() {
+    ArrayNoteRepository() {
         this.notes = new ArrayList<>();
     }
 
@@ -28,9 +28,14 @@ public class ArrayNoteRepository implements NoteRepository {
     @Override
     public void saveNote(Note note) {
         note.setDateLastChange(new Date());
-        String id = UUID.randomUUID().toString();
-        note.setId(id);
-        this.notes.add(note);
+        if (notes.contains(note)) {
+            notes.remove(note);
+            notes.add(note);
+        } else {
+            String id = UUID.randomUUID().toString();
+            note.setId(id);
+            this.notes.add(note);
+        }
         notes.sort(new NoteComparator());
     }
 

@@ -2,18 +2,18 @@ package com.krus210.notes;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -39,6 +39,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     int month;
     int dayOfMonth;
     Calendar calendar;
+    private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
     private static final String ID_FROM_SAVED_INSTANT_STATE = "id_from_saved_instant_state";
     String id;
 
@@ -68,7 +69,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         editDateDeadline.setEnabled(false);
         buttonShowCalendar.setEnabled(false);
 
-        String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
         id = getIntent().getStringExtra(ID_FROM_LIST_NOTES_ACTIVITY);
         if (id != null) {
             Note note = App.getNoteRepository().getNoteById(id);
@@ -187,11 +187,10 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
         if (!(title.equals("") && snippet.equals("") && note.getDateDeadline() == null)) {
             if (id != null) {
-                App.getNoteRepository().getNoteById(id).setTitle(title);
-                App.getNoteRepository().getNoteById(id).setSnippet(snippet);
-                App.getNoteRepository().getNoteById(id).setDateDeadline(note.getDateDeadline());
-            } else {
-                App.getNoteRepository().saveNote(note);
+                note.setId(id);
+            }
+            App.getNoteRepository().saveNote(note);
+            if (id == null) {
                 id = note.getId();
             }
             Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();

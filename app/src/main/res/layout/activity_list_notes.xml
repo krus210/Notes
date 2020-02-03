@@ -25,6 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_list_layout"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/dimen_note"
+        android:layout_marginStart="@dimen/dimen_note"
+        android:layout_marginEnd="@dimen/dimen_note"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
