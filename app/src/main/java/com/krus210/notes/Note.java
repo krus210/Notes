@@ -11,18 +11,18 @@ public class Note{
     private Date dateLastChange;
     private Date dateDeadline;
 
-    public Note(String title, String snippet, Date dateDeadline) {
+    Note(String title, String snippet, Date dateDeadline) {
         this.title = title;
         this.snippet = snippet;
         this.dateDeadline = dateDeadline;
     }
 
-    public Note(String title, String snippet) {
+    Note(String title, String snippet) {
         this.title = title;
         this.snippet = snippet;
     }
 
-    public Note(String id) {
+    Note(String id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class Note{
         this.id = id;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
@@ -42,7 +42,7 @@ public class Note{
         this.title = title;
     }
 
-    public String getSnippet() {
+    String getSnippet() {
         return snippet;
     }
 
@@ -50,19 +50,19 @@ public class Note{
         this.snippet = snippet;
     }
 
-    public Date getDateLastChange() {
+    Date getDateLastChange() {
         return dateLastChange;
     }
 
-    public void setDateLastChange(Date dateLastChange) {
+    void setDateLastChange(Date dateLastChange) {
         this.dateLastChange = dateLastChange;
     }
 
-    public Date getDateDeadline() {
+    Date getDateDeadline() {
         return dateDeadline;
     }
 
-    public void setDateDeadline(Date dateDeadline) {
+    void setDateDeadline(Date dateDeadline) {
         this.dateDeadline = dateDeadline;
     }
 

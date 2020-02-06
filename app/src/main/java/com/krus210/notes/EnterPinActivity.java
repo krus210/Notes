@@ -1,25 +1,23 @@
 package com.krus210.notes;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class EnterPinActivity extends AppCompatActivity {
 
-    private SharedPreferences sharedPreferences;
-    private static final String ENTER_PIN_SETTINGS = "enter_pin_settings";
-    private static final String ENTER_PIN = "enter_pin";
-    ImageButton buttonLight1;
-    ImageButton buttonLight2;
-    ImageButton buttonLight3;
-    ImageButton buttonLight4;
+    private static final String PIN_FROM_INSTANCE_STATE = "pin_from_instance_state";
+    private ImageButton buttonLight1;
+    private ImageButton buttonLight2;
+    private ImageButton buttonLight3;
+    private ImageButton buttonLight4;
+    private String enteredPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +32,7 @@ public class EnterPinActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        sharedPreferences = this.getSharedPreferences(ENTER_PIN_SETTINGS, Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(ENTER_PIN)) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(ENTER_PIN, "");
-            editor.apply();
-        }
+        enteredPin = "";
         buttonLight1 = findViewById(R.id.button_light_1);
         buttonLight2 = findViewById(R.id.button_light_2);
         buttonLight3 = findViewById(R.id.button_light_3);
@@ -49,10 +42,7 @@ public class EnterPinActivity extends AppCompatActivity {
 
     public void onClickNumber(View view) {
         Button buttonView = (Button) view;
-        String enteredPin = "";
-        if (sharedPreferences.contains(ENTER_PIN)) {
-            enteredPin = sharedPreferences.getString(ENTER_PIN, "");
-        }
+
         if (buttonView.getId() == R.id.button_back) {
             if (enteredPin.length() > 0) {
                 enteredPin = enteredPin.substring(0, enteredPin.length()-1);
@@ -92,9 +82,6 @@ public class EnterPinActivity extends AppCompatActivity {
                 buttonLight4.setBackgroundResource(R.drawable.shape_oval_gray);
         }
         if (enteredPin.length() == 4) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(ENTER_PIN, "");
-            editor.apply();
             if (App.getKeystore().checkPin(enteredPin)) {
                 Intent intent = new Intent(this, ListNotesActivity.class);
                 startActivity(intent);
@@ -107,11 +94,20 @@ public class EnterPinActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.not_equal_pin),
                         Toast.LENGTH_SHORT).show();
             }
-        } else {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(ENTER_PIN, enteredPin);
-            editor.apply();
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(PIN_FROM_INSTANCE_STATE, enteredPin);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState.containsKey(PIN_FROM_INSTANCE_STATE)) {
+            enteredPin = savedInstanceState.getString(PIN_FROM_INSTANCE_STATE, "");
+        }
+    }
 }

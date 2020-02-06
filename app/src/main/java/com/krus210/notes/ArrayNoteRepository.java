@@ -1,6 +1,7 @@
 package com.krus210.notes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +37,7 @@ public class ArrayNoteRepository implements NoteRepository {
             note.setId(id);
             this.notes.add(note);
         }
-        notes.sort(new NoteComparator());
+        Collections.sort(notes, new NoteComparator());
     }
 
     @Override

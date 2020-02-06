@@ -68,7 +68,7 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:columnCount="3"
         android:orientation="horizontal">
 
@@ -76,70 +76,57 @@
             android:id="@+id/button_number_1"
             android:text="@string/number_one"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_2"
             android:text="@string/number_two"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_3"
             android:text="@string/number_three"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_4"
             android:text="@string/number_four"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_5"
             android:text="@string/number_five"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_6"
             android:text="@string/number_six"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_7"
             android:text="@string/number_seven"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_8"
             android:text="@string/number_eight"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_9"
             android:text="@string/number_nine"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"/>
-        <View
-            android:layout_width="0dp"
             android:layout_columnWeight="1"/>
         <Button
             android:id="@+id/button_number_0"
             android:text="@string/number_zero"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
+            android:layout_column="1"
             android:layout_columnWeight="1"/>
 
         <Button
             android:id="@+id/button_back"
             android:onClick="onClickNumber"
-            android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:foreground="@drawable/ic_keyboard_backspace_black_24dp"
             android:foregroundGravity="center"/>

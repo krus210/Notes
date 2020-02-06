@@ -3,21 +3,18 @@ package com.krus210.notes;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -27,7 +24,6 @@ public class ListNotesActivity extends AppCompatActivity {
     private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
     ItemsNoteAdapter adapter;
     Intent intentCreateNote;
-    AlertDialog.Builder alertDialogBuilder;
     List<Note> notes;
 
     @Override
@@ -56,7 +52,6 @@ public class ListNotesActivity extends AppCompatActivity {
         notes = App.getNoteRepository().getNotes();
         adapter = new ItemsNoteAdapter(notes);
         listView.setAdapter(adapter);
-        alertDialogBuilder = new AlertDialog.Builder(this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,6 +66,8 @@ public class ListNotesActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView,
                                            View view, final int position, long id) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog
+                        .Builder(ListNotesActivity.this);
                 alertDialogBuilder.setIcon(R.drawable.ic_delete_black_24dp)
                         .setTitle(R.string.attention)
                         .setMessage(R.string.message_delete_note)

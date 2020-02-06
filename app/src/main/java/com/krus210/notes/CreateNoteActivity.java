@@ -2,15 +2,8 @@ package com.krus210.notes;
 
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,19 +26,23 @@ import java.util.Locale;
 
 public class CreateNoteActivity extends AppCompatActivity {
 
-    EditText editTitle;
-    EditText editSnippet;
-    CheckBox checkBoxDeadline;
-    EditText editDateDeadline;
-    ImageButton buttonShowCalendar;
-    DatePickerDialog datePickerDialog;
-    int year;
-    int month;
-    int dayOfMonth;
-    Calendar calendar;
-    private final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
+    private EditText editTitle;
+    private EditText editSnippet;
+    private CheckBox checkBoxDeadline;
+    private EditText editDateDeadline;
+    private ImageButton buttonShowCalendar;
+    private static final String ID_FROM_LIST_NOTES_ACTIVITY = "id_list_notes_activity";
     private static final String ID_FROM_SAVED_INSTANT_STATE = "id_from_saved_instant_state";
-    String id;
+    private static final String TITLE_FROM_SAVED_INSTANT_STATE = "title_from_saved_instant_state";
+    private static final String SNIPPET_FROM_SAVED_INSTANT_STATE =
+            "snippet_from_saved_instant_state";
+    private static final String CHECKBOX_FROM_SAVED_INSTANT_STATE =
+            "checkbox_from_saved_instant_state";
+    private static final String DEADLINE_FROM_SAVED_INSTANT_STATE =
+            "deadline_from_saved_instant_state";
+    private String id;
+    private SimpleDateFormat simpleDateFormat;
+    private SimpleDateFormat simpleTimeFormat;
 
 
     @Override
@@ -54,6 +55,12 @@ public class CreateNoteActivity extends AppCompatActivity {
     private void initViews() {
         Toolbar toolbar = findViewById(R.id.toolbar_create_note);
         setSupportActionBar(toolbar);
+        simpleDateFormat = new SimpleDateFormat(
+                getString(R.string.date_time_format),
+                Locale.getDefault());
+        simpleTimeFormat = new SimpleDateFormat(
+                getString(R.string.time_format),
+                Locale.getDefault());
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,10 +82,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             editTitle.setText(note.getTitle());
             editSnippet.setText(note.getSnippet());
             if (note.getDateDeadline() != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat(
-                        getString(R.string.date_time_format),
-                        Locale.getDefault());
-                String dateDeadline = sdf.format(note.getDateDeadline());
+                String dateDeadline = simpleDateFormat.format(note.getDateDeadline());
                 checkBoxDeadline.setChecked(true);
                 editDateDeadline.setEnabled(true);
                 buttonShowCalendar.setEnabled(true);
@@ -96,7 +100,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                 } else {
                     editDateDeadline.setEnabled(true);
                     buttonShowCalendar.setEnabled(true);
-                    String currentDateAndTime = getCurrentDateTime(R.string.date_time_format);
+                    String currentDateAndTime = simpleDateFormat.format(new Date());
                     editDateDeadline.setText(currentDateAndTime);
                 }
             }
@@ -104,11 +108,11 @@ public class CreateNoteActivity extends AppCompatActivity {
     }
 
     public void onClickShowCalendar(View view) {
-        calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(this,
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -118,7 +122,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                         } else {
                             dateFormat = getString(R.string.date_format_month_upper_9);
                         }
-                        String currentTime = getCurrentDateTime(R.string.time_format);
+                        String currentTime = simpleTimeFormat.format(new Date());
                         String dateFromCalendar = String.format(
                                 dateFormat, day, month + 1, year, currentTime);
                         editDateDeadline.setText(dateFromCalendar);
@@ -158,24 +162,16 @@ public class CreateNoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String getCurrentDateTime(int formatDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat(getString(formatDate),
-                Locale.getDefault());
-        return sdf.format(new Date());
-    }
-
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onBackPressed() {
+        Intent intent = new Intent();
         String title = editTitle.getText().toString();
         String snippet = editSnippet.getText().toString();
         Note note;
         if (checkBoxDeadline.isChecked()) {
-            SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
-                    Locale.getDefault());
             Date dateDeadline;
             try {
-                dateDeadline = sdf.parse(editDateDeadline.getText().toString());
+                dateDeadline = simpleDateFormat.parse(editDateDeadline.getText().toString());
                 note = new Note(title, snippet, dateDeadline);
             } catch (ParseException e) {
                 Toast.makeText(this,
@@ -195,11 +191,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
             Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent();
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }
@@ -207,6 +198,13 @@ public class CreateNoteActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString(ID_FROM_SAVED_INSTANT_STATE, id);
+        outState.putString(TITLE_FROM_SAVED_INSTANT_STATE, editTitle.getText().toString());
+        outState.putString(SNIPPET_FROM_SAVED_INSTANT_STATE, editSnippet.getText().toString());
+        outState.putBoolean(CHECKBOX_FROM_SAVED_INSTANT_STATE, checkBoxDeadline.isChecked());
+        if (checkBoxDeadline.isChecked()) {
+            outState.putString(DEADLINE_FROM_SAVED_INSTANT_STATE,
+                    editDateDeadline.getText().toString());
+        }
         super.onSaveInstanceState(outState);
     }
 
@@ -215,19 +213,25 @@ public class CreateNoteActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.containsKey(ID_FROM_SAVED_INSTANT_STATE)) {
             id = savedInstanceState.getString(ID_FROM_SAVED_INSTANT_STATE);
-            Note note = App.getNoteRepository().getNoteById(id);
-            editTitle.setText(note.getTitle());
-            editSnippet.setText(note.getSnippet());
-
-            if (note.getDateDeadline() != null) {
-                checkBoxDeadline.setChecked(true);
-                editDateDeadline.setEnabled(true);
-                buttonShowCalendar.setEnabled(true);
-                SimpleDateFormat sdf = new SimpleDateFormat(getString(R.string.date_time_format),
-                        Locale.getDefault());
-                String dateDeadline = sdf.format(note.getDateDeadline());
-                editDateDeadline.setText(dateDeadline);
-            }
         }
+        if (savedInstanceState.containsKey(TITLE_FROM_SAVED_INSTANT_STATE)) {
+            String title = savedInstanceState.getString(TITLE_FROM_SAVED_INSTANT_STATE);
+            editTitle.setText(title);
+        }
+        if (savedInstanceState.containsKey(SNIPPET_FROM_SAVED_INSTANT_STATE)) {
+            String snippet = savedInstanceState.getString(SNIPPET_FROM_SAVED_INSTANT_STATE);
+            editTitle.setText(snippet);
+        }
+        if (savedInstanceState.containsKey(CHECKBOX_FROM_SAVED_INSTANT_STATE)) {
+            boolean isChecked = savedInstanceState.getBoolean(CHECKBOX_FROM_SAVED_INSTANT_STATE);
+            checkBoxDeadline.setEnabled(isChecked);
+        }
+        if (checkBoxDeadline.isChecked() &&
+                savedInstanceState.containsKey(DEADLINE_FROM_SAVED_INSTANT_STATE)) {
+            String stringDateDeadline= savedInstanceState
+                    .getString(DEADLINE_FROM_SAVED_INSTANT_STATE);
+            editDateDeadline.setText(stringDateDeadline);
+        }
+
     }
 }

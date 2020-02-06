@@ -1,52 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SettingsActivity"
-    android:layout_marginTop="@dimen/margin_standard"
+    android:layout_marginEnd="@dimen/margin_standard"
     android:layout_marginStart="@dimen/margin_standard"
-    android:layout_marginEnd="@dimen/margin_standard">
+    android:layout_marginTop="@dimen/margin_standard"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
 
-
-<TextView
+    <TextView
         android:id="@+id/text_settings_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_standard"
         android:text="@string/enter_new_pin"
-        style="@style/TextAppearance.MaterialComponents.Headline5"
-        android:layout_marginBottom="@dimen/margin_standard"/>
+        style="@style/TextAppearance.MaterialComponents.Headline5"/>
 
-    <LinearLayout
-        android:id="@+id/linear_settings"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/margin_standard">
+        android:hint="@string/hint_edit_pin"
+        app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_pin"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="13"
-            android:hint="@string/hint_edit_pin"
+            android:maxLength="4"
             android:inputType="numberPassword"
-            android:maxLength="4"/>
+            android:imeOptions="actionDone">
 
-        <ImageButton
-            android:id="@+id/button_show_pin"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/ic_visibility_off_black_24dp"
-            android:contentDescription="@string/invisible_description" />
-    </LinearLayout>
+            <requestFocus/>
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button_save_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save" />
+        android:text="@string/save"/>
 
 </LinearLayout>
