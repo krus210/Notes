@@ -110,8 +110,7 @@ public class ListNotesActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intentSettings = new Intent(this, SettingsActivity.class);
-            startActivity(intentSettings);
+            SettingsActivity.startFromSettings(this);
             return true;
         }
 

@@ -24,8 +24,6 @@
     <string name="menu_title_settings">settings</string>
     <string name="menu_create_note_save">save</string>
     <string name="save">Сохранить</string>
-    <string name="invisible_description">invisible</string>
-    <string name="visible_description">visible</string>
     <string name="enter_pin">Введите пин-код</string>
     <string name="button_light_off">button light off</string>
     <string name="number_one">1</string>
@@ -39,10 +37,8 @@
     <string name="number_nine">9</string>
     <string name="number_zero">0</string>
     <string name="not_equal_pin">Неверный пин-код</string>
-    <string name="file_tag">###</string>
     <string name="error_save_file">Ошибка сохранения файла</string>
     <string name="error_read_file">Ошибка чтения файла</string>
     <string name="error_file_not_exist">Ошибка, файл не найден</string>
-    <string name="null_tag">000</string>
     <string name="write_four_digits">Введите 4 цифры</string>
 </resources>

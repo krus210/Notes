@@ -198,13 +198,6 @@ public class CreateNoteActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString(ID_FROM_SAVED_INSTANT_STATE, id);
-        outState.putString(TITLE_FROM_SAVED_INSTANT_STATE, editTitle.getText().toString());
-        outState.putString(SNIPPET_FROM_SAVED_INSTANT_STATE, editSnippet.getText().toString());
-        outState.putBoolean(CHECKBOX_FROM_SAVED_INSTANT_STATE, checkBoxDeadline.isChecked());
-        if (checkBoxDeadline.isChecked()) {
-            outState.putString(DEADLINE_FROM_SAVED_INSTANT_STATE,
-                    editDateDeadline.getText().toString());
-        }
         super.onSaveInstanceState(outState);
     }
 
@@ -214,24 +207,5 @@ public class CreateNoteActivity extends AppCompatActivity {
         if (savedInstanceState.containsKey(ID_FROM_SAVED_INSTANT_STATE)) {
             id = savedInstanceState.getString(ID_FROM_SAVED_INSTANT_STATE);
         }
-        if (savedInstanceState.containsKey(TITLE_FROM_SAVED_INSTANT_STATE)) {
-            String title = savedInstanceState.getString(TITLE_FROM_SAVED_INSTANT_STATE);
-            editTitle.setText(title);
-        }
-        if (savedInstanceState.containsKey(SNIPPET_FROM_SAVED_INSTANT_STATE)) {
-            String snippet = savedInstanceState.getString(SNIPPET_FROM_SAVED_INSTANT_STATE);
-            editTitle.setText(snippet);
-        }
-        if (savedInstanceState.containsKey(CHECKBOX_FROM_SAVED_INSTANT_STATE)) {
-            boolean isChecked = savedInstanceState.getBoolean(CHECKBOX_FROM_SAVED_INSTANT_STATE);
-            checkBoxDeadline.setEnabled(isChecked);
-        }
-        if (checkBoxDeadline.isChecked() &&
-                savedInstanceState.containsKey(DEADLINE_FROM_SAVED_INSTANT_STATE)) {
-            String stringDateDeadline= savedInstanceState
-                    .getString(DEADLINE_FROM_SAVED_INSTANT_STATE);
-            editDateDeadline.setText(stringDateDeadline);
-        }
-
     }
 }

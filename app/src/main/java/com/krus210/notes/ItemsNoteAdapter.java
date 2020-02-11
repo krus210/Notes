@@ -1,6 +1,7 @@
 package com.krus210.notes;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,14 +49,14 @@ public class ItemsNoteAdapter extends BaseAdapter {
         }
         Note note = items.get(position);
         TextView textTitle = view.findViewById(R.id.text_card_view_title);
-        if (note.getTitle().equals("")) {
+        if (TextUtils.isEmpty(note.getTitle())) {
             textTitle.setVisibility(View.GONE);
         } else {
             textTitle.setText(note.getTitle());
             textTitle.setVisibility(View.VISIBLE);
         }
         TextView textSnippet = view.findViewById(R.id.text_card_view_snippet);
-        if (note.getSnippet().equals("")) {
+        if (TextUtils.isEmpty(note.getSnippet())) {
             textSnippet.setVisibility(View.GONE);
         } else {
             textSnippet.setText(note.getSnippet());

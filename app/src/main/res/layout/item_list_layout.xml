@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_example"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:ellipsize="end"
             android:maxLines="1" />
 
@@ -23,7 +23,7 @@
             android:id="@+id/text_card_view_snippet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:ellipsize="end"
             android:maxLines="3"
             android:text="@string/snippet_example"/>
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/deadline_example"
-            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             android:gravity="end"/>
 
 

@@ -1,5 +1,6 @@
 package com.krus210.notes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private static final String FROM_SETTINGS_KEY = "FROM_SETTINGS_KEY";
+
+    public static void startFromSettings(Context context) {
+        Intent intent = new Intent(context, SettingsActivity.class);
+        intent.putExtra(FROM_SETTINGS_KEY, true);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +42,15 @@ public class SettingsActivity extends AppCompatActivity {
                 String pinToSave = editPin.getText().toString();
                 if (pinToSave.length() == 4) {
                     App.getKeystore().saveNew(pinToSave);
-                    Intent intent = new Intent(SettingsActivity.this,
-                            ListNotesActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if (getIntent().hasExtra(FROM_SETTINGS_KEY) &&
+                            getIntent().getBooleanExtra(FROM_SETTINGS_KEY, false)) {
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SettingsActivity.this,
+                                ListNotesActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(SettingsActivity.this,
                             getString(R.string.write_four_digits),

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,8 +23,7 @@ import java.util.UUID;
 public class FileNoteRepository implements NoteRepository {
 
     private Context context;
-    private GsonBuilder gsonBuilder;
-    private Gson gson;
+    private Gson gson = new Gson();
 
     FileNoteRepository(Context context) {
         this.context = context;
@@ -34,8 +32,6 @@ public class FileNoteRepository implements NoteRepository {
     @Override
     public Note getNoteById(String id) {
         String jsonText = readFromFile(context, id);
-        gsonBuilder = new GsonBuilder();
-        gson = gsonBuilder.create();
         return gson.fromJson(jsonText, Note.class);
     }
 
@@ -61,8 +57,6 @@ public class FileNoteRepository implements NoteRepository {
             note.setId(id);
         }
         note.setDateLastChange(new Date());
-        gsonBuilder = new GsonBuilder();
-        gson = gsonBuilder.create();
         String message = gson.toJson(note);
         saveToFile(context, message, id);
         Log.d("log", message);

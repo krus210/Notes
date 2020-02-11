@@ -87,6 +87,7 @@ public class EnterPinActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
+                enteredPin = "";
                 buttonLight1.setBackgroundResource(R.drawable.shape_oval_gray);
                 buttonLight2.setBackgroundResource(R.drawable.shape_oval_gray);
                 buttonLight3.setBackgroundResource(R.drawable.shape_oval_gray);
